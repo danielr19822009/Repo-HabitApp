@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CapaDatos;
 using MySql.Data.MySqlClient;
+using static Mysqlx.Crud.Order.Types;
 
 namespace CapaNegocio
 {
@@ -16,38 +17,47 @@ namespace CapaNegocio
         //Instancio la conexion
         CDConexion cnconexion = new CDConexion();
 
-        public ComboBox cbx_idpropietario { get; set; }
-        public ComboBox cbx_nombrepropietario { get; set; }
 
-        public void AddInmueble(int propietarioid, string nombpropietario, string descrinmueble, string tipoinmueble, string direinmueble, string ciudad)
+        public void AddInmueble(int usuarioid, string descripcion, string tipo_Inmueble, string direccion, string ciudad)
         {
+
+            
             try
             {
                 // Establecemos la conexión con la base de datos
                 using (MySqlConnection conexion = cnconexion.OpenConexion())
                 {
-                    conexion.Open();
+                   
 
                     // Consultar la consulta de inserción SQL
-                    string query = "INSERT INTO inmueble(Tipo_Inmueble, Direccion, Ciudad, Descripcion, Propietarioid) VALUES ('@Tipo_Inmueble','@Direccion','@Ciudad','@Descripcion','@Propietarioid')";
+                    string query = "INSERT INTO inmueble(Tipo_Inmueble, Direccion, Ciudad, Descripcion, usuarioid) VALUES (@tipo_Inmueble,@Direccion,@Ciudad,@Descripcion,@usuarioid)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                     {
+
+                       
                         // Agregar parámetros a la consulta para evitar inyección SQL
-                        cmd.Parameters.AddWithValue("@Tipo_Inmueble", tipoinmueble);
-                        cmd.Parameters.AddWithValue("@Direccion", direinmueble);
-                        cmd.Parameters.AddWithValue("@Ciudad", ciudad);
-                        cmd.Parameters.AddWithValue("@Descripcion", descrinmueble);
-                        cmd.Parameters.AddWithValue("@Propietarioid", propietarioid);
+                        cmd.Parameters.AddWithValue("@tipo_Inmueble", tipo_Inmueble);
+                        cmd.Parameters.AddWithValue("@direccion", direccion);
+                        cmd.Parameters.AddWithValue("@ciudad", ciudad);
+                        cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                        cmd.Parameters.AddWithValue("@usuarioid", usuarioid);
 
 
                         cmd.ExecuteNonQuery();
 
+                        MessageBox.Show("Hola si entre 3");
                         // Confirmar que los datos fueron insertados
-                        MessageBox.Show("Inmueble Cargado correctamente.", "Registro Inmueble - Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                        MessageBox.Show("Inmueble Cargado correctamente.", "Registro Inmueble - Success", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                       
                     }
+                    
                 }
+            }
+            catch (MySqlException ex)
+            {
+               
+                MessageBox.Show("Error al registrar Inmueble: " + ex.Message, "Registro Usuario - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -55,10 +65,35 @@ namespace CapaNegocio
                 Console.WriteLine("Error al Cargar el Inmueble: " + ex.Message);
 
             }
+           
         }
 
 
-      
+        public DataTable MostrarUsers()
+        {
+            DataTable tabla_user = new DataTable(); // Asegurarse de que el DataTable esté inicializado.
+
+            try
+            {
+                // abrir la conexión
+                MySqlConnection conn = cnconexion.OpenConexion();
+
+                // Consulta para obtener los usuarios
+                string queryuser = "SELECT * FROM usuarios";
+                MySqlDataAdapter adapter_user = new MySqlDataAdapter(queryuser, conn);
+
+                adapter_user.Fill(tabla_user); // Llenar el DataTable
+
+                conn.Close();  // No olvides cerrar la conexión después de usarla.
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar datos: " + ex.Message);
+            }
+
+            return tabla_user; // Devolver el DataTable correctamente.
+        }
+
 
 
     }

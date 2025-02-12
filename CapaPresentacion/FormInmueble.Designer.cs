@@ -43,7 +43,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.btnAddinmueble = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txt_ciudad
@@ -187,6 +186,7 @@
             this.btnAddinmueble.Size = new System.Drawing.Size(44, 37);
             this.btnAddinmueble.TabIndex = 75;
             this.btnAddinmueble.UseVisualStyleBackColor = true;
+            this.btnAddinmueble.Click += new System.EventHandler(this.btnAddinmueble_Click);
             // 
             // label21
             // 
@@ -199,22 +199,11 @@
             this.label21.TabIndex = 74;
             this.label21.Text = "Propietario ID:";
             // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("MS Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.textBox1.Location = new System.Drawing.Point(35, 284);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(253, 33);
-            this.textBox1.TabIndex = 88;
-            // 
             // FormInmueble
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(594, 344);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.txt_ciudad);
             this.Controls.Add(this.label40);
             this.Controls.Add(this.cbx_idpropietario);
@@ -254,6 +243,5 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button btnAddinmueble;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }

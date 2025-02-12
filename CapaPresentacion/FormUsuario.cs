@@ -32,27 +32,47 @@ namespace CapaPresentacion
             string celprop = txtcelularprop.Text;
             string contra1 = txtcontra1.Text;
             string contra2 = txtcontra2.Text;
-            string tipousu = cbxtipousuario.SelectedItem.ToString();
+            string tipousu = Convert.ToString(cbxtipousuario.SelectedItem);
             DateTime fecha = dtfechanacprop.Value;
 
-            // Verificar si las contraseñas coinciden
-            if (contra1 == contra2)
+            // Validar que los campos no estén vacíos
+            if (string.IsNullOrWhiteSpace(nombre) ||
+                string.IsNullOrWhiteSpace(apellido) ||
+                string.IsNullOrWhiteSpace(docPropi) ||
+                string.IsNullOrWhiteSpace(correprop) ||
+                string.IsNullOrWhiteSpace(contra1) ||
+                string.IsNullOrWhiteSpace(contra2) ||
+                string.IsNullOrWhiteSpace(tipousu))  // Verificar si se seleccionó un tipo de usuario
             {
-                // Llamar a la función de inserción
-                cnusuario.AddUsuario(nombre, apellido, docPropi, correprop, celprop, contra1, tipousu, fecha);
+                MessageBox.Show("¡Por favor, complete todos los campos!", "Validación de CAMPOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Salir sin hacer nada si hay campos vacíos
             }
-            else
+
+            // Verificar si las contraseñas coinciden
+            if (contra1 != contra2)
             {
+                // Cambiar el color de fondo de los campos de contraseña si no coinciden
                 txtcontra1.BackColor = Color.Red;
                 txtcontra2.BackColor = Color.Red;
-                MessageBox.Show("¡Las contraseñas no coinciden!", "Validación de Contraseñas", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("¡Las contraseñas no coinciden!", "Validación de Contraseñas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Limpiar y restaurar colores después de la validación
                 txtcontra1.Text = "";
                 txtcontra2.Text = "";
                 txtcontra1.BackColor = Color.White;
                 txtcontra2.BackColor = Color.White;
+
+                return; // Salir sin continuar con la inserción si las contraseñas no coinciden
             }
+
+            // Si pasa la validación, proceder a insertar el usuario
+            cnusuario.AddUsuario(nombre, apellido, docPropi, correprop, celprop, contra1, tipousu, fecha);
+
+            // Limpiar los campos después de agregar el propietario
+            cnusuario.Limpiar(txtnombprop, txtapellprop, txtdocprop, txtcorreoprop, txtcelularprop, txtcontra1, txtcontra2, cbxtipousuario, dtfechanacprop);
         }
 
-     
+
+
     }
 }

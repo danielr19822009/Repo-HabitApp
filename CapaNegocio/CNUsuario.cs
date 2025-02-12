@@ -26,8 +26,7 @@ namespace CapaNegocio
                 MySqlConnection conn = cnconexion.OpenConexion();
 
                 // Query de inserción
-                string qinsertusuario = "INSERT INTO usuarios(nombre, apellido, documentoIdentidad, fechaNacimiento, correo, telefono, contrasena, tipoUsuario) " +
-                                         "VALUES (@nombre, @apellido, @docidentidad, @fechanac, @correo, @telefono, @contrasena, @tipousuario)";
+                string qinsertusuario = "INSERT INTO usuarios(nombre, apellido, documentoIdentidad, fechaNacimiento, correo, telefono, contrasena, tipoUsuario) VALUES (@nombre, @apellido, @docidentidad, @fechanac, @correo, @telefono, @contrasena, @tipousuario)";
 
                 MySqlCommand cmd = new MySqlCommand(qinsertusuario, conn);
 
@@ -45,12 +44,14 @@ namespace CapaNegocio
                 cmd.ExecuteNonQuery();
 
                 // Confirmar que los datos fueron insertados
-                MessageBox.Show("Usuario insertado correctamente.", "Registro Usuario - Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("¡Propietario agregado correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show("Error al registrar usuario: " + ex.Message, "Registro Usuario - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            
 
         }
 
@@ -66,8 +67,28 @@ namespace CapaNegocio
 
 
 
+        public void Limpiar(TextBox txtnombprop, TextBox txtapellprop,TextBox txtdocprop,TextBox txtcorreoprop,TextBox txtcelularprop,TextBox txtcontra1,TextBox txtcontra2,ComboBox cbxtipousuario,DateTimePicker dtfechanacprop)
+        {
+            // Limpiar los TextBox
+            txtnombprop.Clear();
+            txtapellprop.Clear();
+            txtdocprop.Clear();
+            txtcorreoprop.Clear();
+            txtcelularprop.Clear();
+            txtcontra1.Clear();
+            txtcontra2.Clear();
 
-       
+            // Limpiar el ComboBox (restaurar el valor seleccionado a nulo o el valor predeterminado)
+            cbxtipousuario.SelectedIndex = -1;  // Esto deselecciona cualquier valor seleccionado, si aplica
+
+            // Limpiar el DateTimePicker
+            dtfechanacprop.Value = DateTime.Now;  // Establecer la fecha actual o un valor predeterminado
+
+            // Si quieres restaurar los colores de los TextBox (como en el caso de contraseñas)
+            txtcontra1.BackColor = Color.White;
+            txtcontra2.BackColor = Color.White;
+        }
+
 
 
 
