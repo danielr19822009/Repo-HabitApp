@@ -18,7 +18,7 @@ namespace CapaNegocio
         CDConexion cnconexion = new CDConexion();
 
 
-        public void AddInmueble(int usuarioid, string descripcion, string tipo_Inmueble, string direccion, string ciudad)
+        public void AddInmueble(int arriendoID, string descripcion, string tipo_Inmueble, string direccion, string ciudad)
         {
 
             
@@ -30,7 +30,7 @@ namespace CapaNegocio
                    
 
                     // Consultar la consulta de inserción SQL
-                    string query = "INSERT INTO inmueble(Tipo_Inmueble, Direccion, Ciudad, Descripcion, usuarioid) VALUES (@tipo_Inmueble,@Direccion,@Ciudad,@Descripcion,@usuarioid)";
+                    string query = "INSERT INTO inmueble(Tipo_Inmueble, Direccion, Ciudad, Descripcion, arriendoID) VALUES (@tipo_Inmueble,@Direccion,@Ciudad,@Descripcion,@usuarioid)";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                     {
@@ -41,7 +41,7 @@ namespace CapaNegocio
                         cmd.Parameters.AddWithValue("@direccion", direccion);
                         cmd.Parameters.AddWithValue("@ciudad", ciudad);
                         cmd.Parameters.AddWithValue("@descripcion", descripcion);
-                        cmd.Parameters.AddWithValue("@usuarioid", usuarioid);
+                        cmd.Parameters.AddWithValue("@usuarioid", arriendoID);
 
 
                         cmd.ExecuteNonQuery();
@@ -69,9 +69,9 @@ namespace CapaNegocio
         }
 
 
-        public DataTable MostrarUsers()
+        public DataTable MostrarArriendo()
         {
-            DataTable tabla_user = new DataTable(); // Asegurarse de que el DataTable esté inicializado.
+            DataTable tabla_arriendo = new DataTable(); // Asegurarse de que el DataTable esté inicializado.
 
             try
             {
@@ -79,10 +79,10 @@ namespace CapaNegocio
                 MySqlConnection conn = cnconexion.OpenConexion();
 
                 // Consulta para obtener los usuarios
-                string queryuser = "SELECT * FROM usuarios";
-                MySqlDataAdapter adapter_user = new MySqlDataAdapter(queryuser, conn);
+                string queryariendo = "SELECT * FROM arriendos";
+                MySqlDataAdapter adapter_arri = new MySqlDataAdapter(queryariendo, conn);
 
-                adapter_user.Fill(tabla_user); // Llenar el DataTable
+                adapter_arri.Fill(tabla_arriendo); // Llenar el DataTable
 
                 conn.Close();  // No olvides cerrar la conexión después de usarla.
             }
@@ -91,7 +91,7 @@ namespace CapaNegocio
                 MessageBox.Show("Error al cargar datos: " + ex.Message);
             }
 
-            return tabla_user; // Devolver el DataTable correctamente.
+            return tabla_arriendo; // Devolver el DataTable correctamente.
         }
 
 

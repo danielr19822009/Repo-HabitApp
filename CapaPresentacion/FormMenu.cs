@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CapaNegocio;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CapaPresentacion
 {
@@ -30,9 +22,9 @@ namespace CapaPresentacion
         public string NombreUsuario { get; set; }
         public string ApellidoUsuario { get; set; }
         public string TipoUsuario { get; set; }
-        
 
-        public FormMenu(string nombre,string apellido,string tipoUsuario)
+        // Constructor
+        public FormMenu(string nombre, string apellido, string tipoUsuario)
         {
             InitializeComponent();
 
@@ -40,10 +32,10 @@ namespace CapaPresentacion
             NombreUsuario = nombre;
             ApellidoUsuario = apellido;
             TipoUsuario = tipoUsuario;
-
+            
         }
 
-       
+
 
         public void AbrirFormInPanel(Form Formhijo)
         {
@@ -68,14 +60,16 @@ namespace CapaPresentacion
 
         private void FormMenu2_Load(object sender, EventArgs e)
         {
+            // Mostrar los valores en las etiquetas correspondientes
             lblgetusuario.Text = NombreUsuario + " " + ApellidoUsuario;
+            MessageBox.Show(NombreUsuario);
             lbltipousuario.Text = TipoUsuario;
 
             // Validar si el tipo de usuario es diferente de "Administrador"
             if (TipoUsuario != "Administrador")
             {
-                // Deshabilitar la TabPage de "Usuarios"
-               
+                btnUsuario.Enabled = false;
+
             }
 
         }

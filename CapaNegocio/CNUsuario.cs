@@ -13,6 +13,7 @@ namespace CapaNegocio
     {
         //Instancio la conexion
         CDConexion cnconexion = new CDConexion();
+       
 
 
         public void AddUsuario(string nombre, string apellido, string docPropi, string correprop, string celprop, string contra1, string tipousu, DateTime fecha)
@@ -51,7 +52,7 @@ namespace CapaNegocio
                 MessageBox.Show("Error al registrar usuario: " + ex.Message, "Registro Usuario - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            
+           
 
         }
 

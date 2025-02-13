@@ -32,7 +32,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnInmueble = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnInquilino = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
@@ -56,7 +55,6 @@
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.btnInmueble);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.btnInquilino);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.ForeColor = System.Drawing.Color.White;
@@ -71,9 +69,9 @@
             this.btnArriendo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnArriendo.Font = new System.Drawing.Font("MS UI Gothic", 12F);
             this.btnArriendo.ForeColor = System.Drawing.Color.Black;
-            this.btnArriendo.Location = new System.Drawing.Point(435, 7);
+            this.btnArriendo.Location = new System.Drawing.Point(413, 2);
             this.btnArriendo.Name = "btnArriendo";
-            this.btnArriendo.Size = new System.Drawing.Size(80, 40);
+            this.btnArriendo.Size = new System.Drawing.Size(90, 48);
             this.btnArriendo.TabIndex = 20;
             this.btnArriendo.Text = "Arriendo";
             this.btnArriendo.UseVisualStyleBackColor = false;
@@ -85,9 +83,9 @@
             this.btnverArriendos.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnverArriendos.Font = new System.Drawing.Font("MS UI Gothic", 12F);
             this.btnverArriendos.ForeColor = System.Drawing.Color.Black;
-            this.btnverArriendos.Location = new System.Drawing.Point(514, 7);
+            this.btnverArriendos.Location = new System.Drawing.Point(503, 2);
             this.btnverArriendos.Name = "btnverArriendos";
-            this.btnverArriendos.Size = new System.Drawing.Size(80, 40);
+            this.btnverArriendos.Size = new System.Drawing.Size(90, 48);
             this.btnverArriendos.TabIndex = 21;
             this.btnverArriendos.Text = "Ver Arriendos";
             this.btnverArriendos.UseVisualStyleBackColor = false;
@@ -110,9 +108,9 @@
             this.btnVerInmuebles.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnVerInmuebles.Font = new System.Drawing.Font("MS UI Gothic", 12F);
             this.btnVerInmuebles.ForeColor = System.Drawing.Color.Black;
-            this.btnVerInmuebles.Location = new System.Drawing.Point(593, 7);
+            this.btnVerInmuebles.Location = new System.Drawing.Point(592, 2);
             this.btnVerInmuebles.Name = "btnVerInmuebles";
-            this.btnVerInmuebles.Size = new System.Drawing.Size(80, 40);
+            this.btnVerInmuebles.Size = new System.Drawing.Size(90, 48);
             this.btnVerInmuebles.TabIndex = 22;
             this.btnVerInmuebles.Text = "Ver Inmuebles";
             this.btnVerInmuebles.UseVisualStyleBackColor = false;
@@ -135,9 +133,9 @@
             this.btnUsuario.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnUsuario.Font = new System.Drawing.Font("MS UI Gothic", 12F);
             this.btnUsuario.ForeColor = System.Drawing.Color.Black;
-            this.btnUsuario.Location = new System.Drawing.Point(199, 7);
+            this.btnUsuario.Location = new System.Drawing.Point(235, 2);
             this.btnUsuario.Name = "btnUsuario";
-            this.btnUsuario.Size = new System.Drawing.Size(80, 40);
+            this.btnUsuario.Size = new System.Drawing.Size(90, 48);
             this.btnUsuario.TabIndex = 17;
             this.btnUsuario.Text = "Usuario";
             this.btnUsuario.UseVisualStyleBackColor = false;
@@ -160,9 +158,9 @@
             this.btnInmueble.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnInmueble.Font = new System.Drawing.Font("MS UI Gothic", 12F);
             this.btnInmueble.ForeColor = System.Drawing.Color.Black;
-            this.btnInmueble.Location = new System.Drawing.Point(278, 7);
+            this.btnInmueble.Location = new System.Drawing.Point(323, 2);
             this.btnInmueble.Name = "btnInmueble";
-            this.btnInmueble.Size = new System.Drawing.Size(80, 40);
+            this.btnInmueble.Size = new System.Drawing.Size(90, 48);
             this.btnInmueble.TabIndex = 18;
             this.btnInmueble.Text = "Inmueble";
             this.btnInmueble.UseVisualStyleBackColor = false;
@@ -177,20 +175,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // btnInquilino
-            // 
-            this.btnInquilino.BackColor = System.Drawing.Color.White;
-            this.btnInquilino.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnInquilino.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.btnInquilino.ForeColor = System.Drawing.Color.Black;
-            this.btnInquilino.Location = new System.Drawing.Point(356, 7);
-            this.btnInquilino.Name = "btnInquilino";
-            this.btnInquilino.Size = new System.Drawing.Size(80, 40);
-            this.btnInquilino.TabIndex = 19;
-            this.btnInquilino.Text = "Inquilino";
-            this.btnInquilino.UseVisualStyleBackColor = false;
-            this.btnInquilino.Click += new System.EventHandler(this.btnInquilino_Click_1);
             // 
             // splitContainer1
             // 
@@ -250,6 +234,5 @@
         private System.Windows.Forms.Button btnUsuario;
         private System.Windows.Forms.Button btnInmueble;
         private System.Windows.Forms.Button btnArriendo;
-        private System.Windows.Forms.Button btnInquilino;
     }
 }

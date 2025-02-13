@@ -28,7 +28,7 @@ namespace CapaPresentacion
          
         }
 
-        private void MostrarUsuario()
+        private void MostrarArriendo()
         {
 
             //Manera directa
@@ -62,33 +62,28 @@ namespace CapaPresentacion
 
 
             // Obtener los datos de los usuarios
-            DataTable tabla_user = cninmueble.MostrarUsers();
+            DataTable tabla_user = cninmueble.MostrarArriendo();
 
             // Asignar el DataTable como origen de datos en el ComboBox para el nombre
 
-            cbx_idpropietario.DataSource = tabla_user;
-             // listaUsuarios is a List<Usuario> or a similar collection
-            cbx_idpropietario.ValueMember = "UsuarioID";  // Property used for the value
+            cbx_arriendoID.DataSource = tabla_user;
+            // listaUsuarios is a List<Usuario> or a similar collection
+            cbx_arriendoID.ValueMember = "arriendoID";  // Property used for the value
            
-
-
-            cbx_nombrepropietario.DataSource = tabla_user;
-            cbx_nombrepropietario.DisplayMember = "nombre";  // Mostrar el nombre
-            cbx_nombrepropietario.ValueMember = "nombre"; // Valor será el ID del propietario
-
         }
 
         private void FormInmueble_Load(object sender, EventArgs e)
         {
-            MostrarUsuario();
+            MostrarArriendo();
         }
 
         private void btnAddinmueble_Click(object sender, EventArgs e)
         {
             // Captura los valores de los TextBox
-            int idusuario = Convert.ToInt16(cbx_idpropietario.SelectedValue);
+            int arriendoID = Convert.ToInt16(cbx_arriendoID.SelectedValue);
             string descripcion = txt_DescripcionInmueble.Text;
-            string tipoinmueble = Convert.ToString(cbx_nombrepropietario.SelectedValue);
+            string tipoinmueble = cbx_tipoinmueble.SelectedItem.ToString(); //string tipoinmueble = Convert.ToString(cbx_tipoinmueble.SelectedValue);
+
             string direccion = txt_direccion.Text;
             string ciudad = txt_ciudad.Text;
 
@@ -99,12 +94,12 @@ namespace CapaPresentacion
                 string.IsNullOrWhiteSpace(direccion) ||
                 string.IsNullOrWhiteSpace(ciudad))
             {
-                MessageBox.Show("¡Por favor, complete todos los campos!", "Validación de CAMPOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("¡Por favor, complete todos los campos!" , "Validación de CAMPOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Salir sin hacer nada si hay campos vacíos
             }
 
             // Llamar a la función de inserción y enviar los parametros(variables que capturan los textbox)
-            cninmueble.AddInmueble(idusuario, descripcion, tipoinmueble, direccion, ciudad);
+            cninmueble.AddInmueble(arriendoID, descripcion, tipoinmueble, direccion, ciudad);
         }
     }
     }

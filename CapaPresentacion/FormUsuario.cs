@@ -16,13 +16,16 @@ namespace CapaPresentacion
 
         //instanciamos
         CNUsuario cnusuario = new CNUsuario();
+        CNValidaciones cnvalidaciones = new CNValidaciones();
 
         public FormUsuario()
         {
             InitializeComponent();
         }
 
-        private void btnAddpropietario_Click(object sender, EventArgs e)
+       
+
+        public void btnAddpropietario_Click(object sender, EventArgs e)
         {
             // Captura los valores de los TextBox
             string nombre = txtnombprop.Text;
@@ -35,6 +38,8 @@ namespace CapaPresentacion
             string tipousu = Convert.ToString(cbxtipousuario.SelectedItem);
             DateTime fecha = dtfechanacprop.Value;
 
+            
+      
             // Validar que los campos no estén vacíos
             if (string.IsNullOrWhiteSpace(nombre) ||
                 string.IsNullOrWhiteSpace(apellido) ||
@@ -42,8 +47,9 @@ namespace CapaPresentacion
                 string.IsNullOrWhiteSpace(correprop) ||
                 string.IsNullOrWhiteSpace(contra1) ||
                 string.IsNullOrWhiteSpace(contra2) ||
-                string.IsNullOrWhiteSpace(tipousu))  // Verificar si se seleccionó un tipo de usuario
+                string.IsNullOrWhiteSpace(tipousu))  
             {
+
                 MessageBox.Show("¡Por favor, complete todos los campos!", "Validación de CAMPOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Salir sin hacer nada si hay campos vacíos
             }
@@ -57,8 +63,8 @@ namespace CapaPresentacion
                 MessageBox.Show("¡Las contraseñas no coinciden!", "Validación de Contraseñas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 // Limpiar y restaurar colores después de la validación
-                txtcontra1.Text = "";
-                txtcontra2.Text = "";
+                txtcontra1.Clear();
+                txtcontra2.Clear();
                 txtcontra1.BackColor = Color.White;
                 txtcontra2.BackColor = Color.White;
 
@@ -70,9 +76,38 @@ namespace CapaPresentacion
 
             // Limpiar los campos después de agregar el propietario
             cnusuario.Limpiar(txtnombprop, txtapellprop, txtdocprop, txtcorreoprop, txtcelularprop, txtcontra1, txtcontra2, cbxtipousuario, dtfechanacprop);
+
+
         }
 
+       
 
+        //public void ValidarCamposNumero() {
+        //    // Llamar a la función de validación para cada TextBox
+        //    cnvalidaciones.SoloNumeros(txtdocprop.Text);
+        //    cnvalidaciones.SoloNumeros(txtcelularprop.Text);
+        //}
 
+        private void txtnombprop_TextChanged(object sender, EventArgs e)
+        {
+            cnvalidaciones.SoloLetras(txtnombprop);
+        }
+
+        private void txtapellprop_TextChanged(object sender, EventArgs e)
+        {
+            cnvalidaciones.SoloLetras(txtapellprop);
+        }
+
+        private void txtdocprop_TextChanged(object sender, EventArgs e)
+        {
+            cnvalidaciones.SoloNumeros(txtdocprop);
+        }
+
+        private void txtcelularprop_TextChanged(object sender, EventArgs e)
+        {
+            cnvalidaciones.SoloNumeros(txtcelularprop);
+        }
+
+      
     }
 }
