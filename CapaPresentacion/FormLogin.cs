@@ -96,59 +96,55 @@ namespace CapaPresentacion
 
             try
             {
-                // Usar la conexión abierta previamente
-                using (MySqlConnection conexion = cnconexion.CNOpenConexion())
+
+                using (MySqlCommand cm = new MySqlCommand(querylogin, cnconexion.CNOpenConexion()))
                 {
-                    if (conexion == null) return; // Si la conexión no se pudo abrir, no continuar
+                    // Agregar parámetros para evitar inyección SQL
+                    cm.Parameters.AddWithValue("@usuario", usuario);
+                    cm.Parameters.AddWithValue("@contrasena", contrasenaHash);
 
-                    using (MySqlCommand cm = new MySqlCommand(querylogin, conexion))
+                    using (MySqlDataReader lector = cm.ExecuteReader())
                     {
-                        // Agregar parámetros para evitar inyección SQL
-                        cm.Parameters.AddWithValue("@usuario", usuario);
-                        cm.Parameters.AddWithValue("@contrasena", contrasenaHash);
-
-                        // Validar que el usuario sea propietario o administrador para dejarlo ingresar al sistema
-                        using (MySqlDataReader lector = cm.ExecuteReader())
+                        if (lector.Read())
                         {
-                            if (lector.Read())
+                            // Obtener el tipo de usuario desde la base de datos
+                            string tipousuario = lector["tipoUsuario"].ToString();
+
+                            // Validar si el tipo de usuario es "propietario" o "administrador"
+                            if (tipousuario == "Propietario" || tipousuario == "Administrador")
                             {
-                                // Obtener el tipo de usuario desde la base de datos
-                                string tipousuario = lector["tipoUsuario"].ToString();
+                                // Concatenar el nombre y apellido correctamente
+                                string nombreCompleto = lector["nombre"].ToString() + " " + lector["apellido"].ToString();
 
-                                // Validar si el tipo de usuario es "propietario" o "administrador"
-                                //if (tipousuario == "propietario" || tipousuario == "administrador")
-                                //{
-                                    // Concatenar el nombre y apellido correctamente
-                                    string nombreCompleto = lector["nombre"].ToString() + " " + lector["apellido"].ToString();
+                                // Alerta mostrando el usuario
+                                MessageBox.Show("Bienvenido, " + nombreCompleto);
 
-                                    // Alerta mostrando el usuario
-                                    MessageBox.Show("Bienvenido, " + nombreCompleto);
+                                // Crear variables para enviarlas al formulario de menú
+                                string nombre = lector["nombre"].ToString();
+                                string apellido = lector["apellido"].ToString();
 
-                                    // Crear variables para enviarlas al formulario de menú
-                                    string nombre = lector["nombre"].ToString();
-                                    string apellido = lector["apellido"].ToString();
+                                // Crear el formulario de menú y pasar los datos
+                                FormMenu formmenu = new FormMenu(nombre, apellido, tipousuario);
+                                formmenu.Show();
 
-                                    // Crear el formulario de menú y pasar los datos
-                                    FormMenu formmenu = new FormMenu(nombre, apellido, tipousuario);
-                                    formmenu.Show();
-
-                                    // Cerramos el formulario login
-                                    this.Hide();
-                                //}
-                                //else
-                                //{
-                                //    // Si el tipo de usuario no es permitido, mostrar un mensaje
-                                //    MessageBox.Show("Acceso Denegado: Usuario no autorizado", "ERROR DE ACCESO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                //}
+                                // Cerramos el formulario login
+                                this.Hide();
                             }
                             else
                             {
-                                MessageBox.Show("Credenciales Incorrectas", "USUARIO SIN ACCESO", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                // Si el tipo de usuario no es permitido, mostrar un mensaje
+                                MessageBox.Show("Acceso Denegado: Usuario no autorizado", "ERROR DE ACCESO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
+                        else {
+                            MessageBox.Show("Usuario o Contraseña Errada", "ERROR DE ACCESO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                      
                     }
                 }
+                
             }
+
             catch (MySqlException ex)
             {
                 // Mostrar el mensaje de error de la base de datos
@@ -167,7 +163,7 @@ namespace CapaPresentacion
         private void textBoxUsuario_TextChanged(object sender, EventArgs e)
         {
             // Si quieres hacer alguna validación adicional al cambiar el texto
-            if (!cnvalidaciones.SoloLetras(textBoxUsuario.Text))
+            if (!cnvalidaciones.SoloLetras(textBoxUsuario))
             {
                 textBoxUsuario.BackColor = Color.Red;
 

@@ -84,6 +84,7 @@
             this.txtcelularprop.Name = "txtcelularprop";
             this.txtcelularprop.Size = new System.Drawing.Size(253, 28);
             this.txtcelularprop.TabIndex = 42;
+            this.txtcelularprop.TextChanged += new System.EventHandler(this.txtcelularprop_TextChanged);
             // 
             // label27
             // 
@@ -187,6 +188,7 @@
             this.txtdocprop.Name = "txtdocprop";
             this.txtdocprop.Size = new System.Drawing.Size(253, 28);
             this.txtdocprop.TabIndex = 32;
+            this.txtdocprop.TextChanged += new System.EventHandler(this.txtdocprop_TextChanged);
             // 
             // label1
             // 
@@ -222,6 +224,7 @@
             this.txtapellprop.Name = "txtapellprop";
             this.txtapellprop.Size = new System.Drawing.Size(253, 28);
             this.txtapellprop.TabIndex = 29;
+            this.txtapellprop.TextChanged += new System.EventHandler(this.txtapellprop_TextChanged);
             // 
             // txtnombprop
             // 
@@ -232,6 +235,7 @@
             this.txtnombprop.Name = "txtnombprop";
             this.txtnombprop.Size = new System.Drawing.Size(253, 28);
             this.txtnombprop.TabIndex = 28;
+            this.txtnombprop.TextChanged += new System.EventHandler(this.txtnombprop_TextChanged);
             // 
             // label3
             // 
